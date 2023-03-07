@@ -1,12 +1,11 @@
-# Three.js - Template - Complex
-
-🚧 This template is under construction
+# PACMAN 3D - Three.js
 
 ## Setup
+
 Download [Node.js](https://nodejs.org/en/download/).
 Run this followed commands:
 
-``` bash
+```bash
 # Install dependencies (only the first time)
 npm install
 
