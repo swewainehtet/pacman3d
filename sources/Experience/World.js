@@ -8,9 +8,12 @@ import {
   WALL_HEIGHT,
   POWERPALLET_RADIUS,
   PALLET_RADIUS,
+  PACMAN_RADIUS,
+  GHOST_SIZE,
 } from "./Dim.js";
 import { powerPalletCoords } from "./PowerPalletCoords.js";
 import { palletCoords } from "./PalletCoords.js";
+import { ghostCoords } from "./GhostCoords.js";
 
 export default class World {
   constructor(_options) {
@@ -31,7 +34,7 @@ export default class World {
      * Axes Helper
      */
     const axesHelper = new THREE.AxesHelper(5);
-    // this.scene.add(axesHelper);
+    this.scene.add(axesHelper);
 
     /**
      * Plane
@@ -127,6 +130,35 @@ export default class World {
       pallet.setMatrixAt(i, palletDummy.matrix);
     }
     this.scene.add(pallet);
+
+    /**
+     * PacMan
+     */
+    const pacmanGeometry = new THREE.SphereGeometry(PACMAN_RADIUS);
+    const pacmanMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+    const pacman = new THREE.Mesh(pacmanGeometry, pacmanMaterial);
+    pacman.position.set(14, 10, 0.25);
+    this.scene.add(pacman);
+
+    /**
+     * Ghosts
+     */
+    const ghostGeometry = new THREE.OctahedronGeometry(GHOST_SIZE);
+    const ghostMaterial = new THREE.MeshBasicMaterial();
+    const ghost = new THREE.InstancedMesh(
+      ghostGeometry,
+      ghostMaterial,
+      ghostCoords.length
+    );
+    const ghostDummy = new THREE.Object3D();
+    for (let i = 0; i < ghostCoords.length; i++) {
+      ghostDummy.position.set(ghostCoords[i].x, ghostCoords[i].y, GHOST_SIZE);
+      ghostDummy.updateMatrix();
+      ghost.setMatrixAt(i, ghostDummy.matrix);
+      ghost.setColorAt(i, new THREE.Color(ghostCoords[i].color));
+      ghost.instanceColor.needsUpdate = true;
+    }
+    this.scene.add(ghost);
   }
 
   resize() {}
