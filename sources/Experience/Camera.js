@@ -43,7 +43,7 @@ export default class Camera {
     this.modes.default.instance.rotation.reorder("YXZ");
     this.modes.default.instance.position.set(
       BOARD_WIDTH / 2,
-      BOARD_HEIGHT - 75,
+      BOARD_HEIGHT - 100,
       100
     );
     this.modes.default.instance.lookAt(BOARD_WIDTH / 2, BOARD_HEIGHT / 2, 0);

@@ -7,8 +7,10 @@ import {
   WALL_WIDTH,
   WALL_HEIGHT,
   POWERPALLET_RADIUS,
+  PALLET_RADIUS,
 } from "./Dim.js";
 import { powerPalletCoords } from "./PowerPalletCoords.js";
+import { palletCoords } from "./PalletCoords.js";
 
 export default class World {
   constructor(_options) {
@@ -29,7 +31,7 @@ export default class World {
      * Axes Helper
      */
     const axesHelper = new THREE.AxesHelper(5);
-    this.scene.add(axesHelper);
+    // this.scene.add(axesHelper);
 
     /**
      * Plane
@@ -41,8 +43,8 @@ export default class World {
       BOARD_HEIGHT
     );
     const planeMaterial = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
-      wireframe: true,
+      color: 0x000,
+      wireframe: false,
     });
     const plane = new THREE.Mesh(planeGeometry, planeMaterial);
     plane.position.set(BOARD_WIDTH / 2, BOARD_HEIGHT / 2, 0);
@@ -55,9 +57,12 @@ export default class World {
     const wallGeometry = new THREE.BoxBufferGeometry(
       WALL_WIDTH,
       WALL_HEIGHT,
-      1
+      0.5
     );
-    const wallMaterial = new THREE.MeshBasicMaterial();
+    const wallMaterial = new THREE.MeshBasicMaterial({
+      color: 0x7792cb,
+      wireframe: false,
+    });
     const wallCount = wallCoords.length;
     const wall = new THREE.InstancedMesh(wallGeometry, wallMaterial, wallCount);
 
@@ -78,7 +83,8 @@ export default class World {
     const powerPalletDummy = new THREE.Object3D();
     const powerPalletGeometry = new THREE.SphereGeometry(POWERPALLET_RADIUS);
     const powerPalletMaterial = new THREE.MeshBasicMaterial({
-      color: 0x00ffff,
+      color: 0xcc7722,
+      wireframe: false,
     });
     const powerPalletCount = powerPalletCoords.length;
     const powerPallet = new THREE.InstancedMesh(
@@ -88,14 +94,45 @@ export default class World {
     );
     for (let i = 0; i < powerPalletCount; i++) {
       powerPalletDummy.position.set(
-        powerPalletCoords[i].x + POWERPALLET_RADIUS,
-        powerPalletCoords[i].y + POWERPALLET_RADIUS,
+        powerPalletCoords[i].x + 0.5,
+        powerPalletCoords[i].y + 0.5,
         0
       );
       powerPalletDummy.updateMatrix();
       powerPallet.setMatrixAt(i, powerPalletDummy.matrix);
     }
     this.scene.add(powerPallet);
+
+    /**
+     * Pallets
+     */
+    const palletDummy = new THREE.Object3D();
+    const palletGeometry = new THREE.SphereGeometry(PALLET_RADIUS);
+    const palletMaterial = new THREE.MeshBasicMaterial({
+      color: 0xf8e473,
+    });
+    const palletCount = palletCoords.length;
+    const pallet = new THREE.InstancedMesh(
+      palletGeometry,
+      palletMaterial,
+      palletCount
+    );
+    for (let i = 0; i < palletCount; i++) {
+      palletDummy.position.set(
+        palletCoords[i].x + 0.5,
+        palletCoords[i].y + 0.5,
+        0
+      );
+      palletDummy.updateMatrix();
+      pallet.setMatrixAt(i, palletDummy.matrix);
+    }
+    this.scene.add(pallet);
+
+    /**
+     * Hemisphere Light
+     */
+    const light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
+    scene.add(light);
   }
 
   resize() {}
