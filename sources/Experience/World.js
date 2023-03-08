@@ -57,7 +57,7 @@ export default class World {
     const wallGeometry = new THREE.BoxBufferGeometry(
       WALL_WIDTH,
       WALL_HEIGHT,
-      0.5
+      1
     );
     const wallMaterial = new THREE.MeshBasicMaterial({
       color: 0x7792cb,
@@ -96,7 +96,7 @@ export default class World {
       powerPalletDummy.position.set(
         powerPalletCoords[i].x + 0.5,
         powerPalletCoords[i].y + 0.5,
-        0
+        0.5
       );
       powerPalletDummy.updateMatrix();
       powerPallet.setMatrixAt(i, powerPalletDummy.matrix);
@@ -121,18 +121,12 @@ export default class World {
       palletDummy.position.set(
         palletCoords[i].x + 0.5,
         palletCoords[i].y + 0.5,
-        0
+        0.2
       );
       palletDummy.updateMatrix();
       pallet.setMatrixAt(i, palletDummy.matrix);
     }
     this.scene.add(pallet);
-
-    /**
-     * Hemisphere Light
-     */
-    const light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
-    scene.add(light);
   }
 
   resize() {}
