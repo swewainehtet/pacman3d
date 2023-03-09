@@ -1,7 +1,7 @@
 import Experience from "../Experience";
 import * as THREE from "three";
 import * as Dim from "../Dim";
-import { powerPalletCoords } from "../PowerPalletCoords";
+import { powerPalletCoords } from "./Coords/PowerPalletCoords";
 
 export default class PowerPallet {
   constructor() {

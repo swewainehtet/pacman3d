@@ -1,7 +1,5 @@
 import * as THREE from "three";
-import { PACMAN_RADIUS, GHOST_SIZE } from "./Dim.js";
 import Experience from "./Experience.js";
-import { ghostCoords } from "./GhostCoords.js";
 import Floor from "./World/Floor.js";
 import Wall from "./World/Wall.js";
 import PowerPallet from "./World/PowerPallet.js";

@@ -1,7 +1,7 @@
 import Experience from "../Experience";
 import * as THREE from "three";
 import * as Dim from "../Dim";
-import { ghostCoords } from "../GhostCoords";
+import { ghostCoords } from "./Coords/GhostCoords.js";
 
 export default class Ghost {
   constructor() {
