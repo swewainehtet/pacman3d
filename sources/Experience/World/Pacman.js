@@ -23,7 +23,7 @@ export default class Pacman {
 
   setMesh() {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
-    this.mesh.position.set(14, 10, 0.25);
+    this.mesh.position.set(14, 9.5, 0.25);
     this.scene.add(this.mesh);
   }
 }

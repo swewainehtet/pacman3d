@@ -24,7 +24,7 @@ export default class Camera {
   setInstance() {
     // Set up
     this.instance = new THREE.PerspectiveCamera(
-      25,
+      20,
       this.config.width / this.config.height,
       0.1,
       150
@@ -43,8 +43,8 @@ export default class Camera {
     this.modes.default.instance.rotation.reorder("YXZ");
     this.modes.default.instance.position.set(
       BOARD_WIDTH / 2,
-      BOARD_HEIGHT - 100,
-      100
+      BOARD_HEIGHT / 2 - 100,
+      90
     );
     this.modes.default.instance.lookAt(BOARD_WIDTH / 2, BOARD_HEIGHT / 2, 0);
 

@@ -24,7 +24,7 @@ export default class Floor {
 
   setMaterial() {
     this.material = new THREE.MeshBasicMaterial({
-      color: 0x000000,
+      color: 0x000005,
       wireframe: false,
     });
   }

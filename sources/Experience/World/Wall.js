@@ -15,14 +15,18 @@ export default class Wall {
   }
 
   setGeometry() {
-    this.geometry = new THREE.BoxGeometry(Dim.WALL_WIDTH, Dim.WALL_HEIGHT, 1);
+    this.geometry = new THREE.BoxGeometry(Dim.WALL_WIDTH, Dim.WALL_HEIGHT, 0.5);
   }
 
   setMaterial() {
-    this.material = new THREE.MeshBasicMaterial({
-      color: 0x7792cb,
-      wireframe: false,
-    });
+    this.material = [
+      new THREE.MeshBasicMaterial({ map: this.resources.items.wallX }),
+      new THREE.MeshBasicMaterial({ map: this.resources.items.wallX }),
+      new THREE.MeshBasicMaterial({ map: this.resources.items.wallY }),
+      new THREE.MeshBasicMaterial({ map: this.resources.items.wallY }),
+      new THREE.MeshBasicMaterial({ map: this.resources.items.wallZ }),
+      new THREE.MeshBasicMaterial({ map: this.resources.items.wallZ }),
+    ];
   }
 
   setMesh() {
@@ -38,7 +42,7 @@ export default class Wall {
       this.dummy.position.set(
         wallCoords[i].x + Dim.WALL_WIDTH / 2,
         wallCoords[i].y + Dim.WALL_HEIGHT / 2,
-        0
+        0.25
       );
       this.dummy.updateMatrix();
       this.mesh.setMatrixAt(i, this.dummy.matrix);
