@@ -11,6 +11,7 @@ export default class Ghost {
 
     this.setGeometry();
     this.setMaterial();
+    // this.setModel();
     this.setMesh();
   }
 
@@ -21,6 +22,35 @@ export default class Ghost {
   setMaterial() {
     this.material = new THREE.MeshBasicMaterial();
   }
+
+  // setModel() {
+  //   this.ghosts = [];
+  //   this.colors = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00];
+  //   this.material = new THREE.MeshBasicMaterial();
+  //   this.model = this.resources.items.ghostModel.scene;
+  //   this.model.scale.set(0.1, 0.1, 0.1);
+
+  //   this.count = ghostCoords.length;
+
+  //   for (let i = 0; i < this.count; i++) {
+  //     this.model.position.set(
+  //       ghostCoords[i].x,
+  //       ghostCoords[i].y,
+  //       Dim.GHOST_SIZE
+  //     );
+  //     this.ghosts.push(structuredClone(this.model));
+  //   }
+
+  //   for (let i = 0; i < this.count; i++) {
+  //     this.ghosts[i].traverse((object) => {
+  //       if (object.isMesh)
+  //         object.material = new THREE.MeshBasicMaterial({
+  //           color: this.colors[i],
+  //         });
+  //     });
+  //     this.scene.add(this.ghosts[i]);
+  //   }
+  // }
 
   setMesh() {
     this.dummy = new THREE.Object3D();
