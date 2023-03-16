@@ -20,7 +20,7 @@ export default class PowerPallet {
 
   setMaterial() {
     this.material = new THREE.MeshBasicMaterial({
-      color: 0xcc7722,
+      color: 0x75e780,
       wireframe: false,
     });
   }

@@ -31,4 +31,9 @@ export default class Pinky {
 
     this.scene.add(this.model);
   }
+
+  update() {
+    this.model.position.z =
+      Dim.GHOST_SIZE * 2 + 0.2 * Math.sin(this.time.current * 0.005);
+  }
 }

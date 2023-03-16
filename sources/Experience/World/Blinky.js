@@ -30,12 +30,10 @@ export default class Blinky {
     });
 
     this.scene.add(this.model);
+  }
 
-    // const testSphere = new THREE.Mesh(
-    //   new THREE.SphereGeometry(Dim.GHOST_SIZE),
-    //   new THREE.MeshBasicMaterial()
-    // );
-    // testSphere.position.set(ghostCoords[0].x, ghostCoords[0].y, Dim.GHOST_SIZE);
-    // this.scene.add(testSphere);
+  update() {
+    this.model.position.z =
+      Dim.GHOST_SIZE * 2 + 0.2 * Math.sin(this.time.current * 0.005);
   }
 }

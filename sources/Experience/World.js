@@ -41,13 +41,16 @@ export default class World {
     this.blinky = new Blinky();
     this.inky = new Inky();
     this.pinky = new Pinky();
-    this.Clyde = new Clyde();
+    this.clyde = new Clyde();
   }
 
   resize() {}
 
   update() {
-    if (this.ghost) this.ghost.update();
+    if (this.blinky) this.blinky.update();
+    if (this.inky) this.inky.update();
+    if (this.pinky) this.pinky.update();
+    if (this.clyde) this.clyde.update();
   }
 
   destroy() {}
