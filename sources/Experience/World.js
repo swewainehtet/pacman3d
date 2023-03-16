@@ -6,6 +6,10 @@ import PowerPallet from "./World/PowerPallet.js";
 import Pallet from "./World/Pallet.js";
 import Pacman from "./World/Pacman.js";
 import Ghost from "./World/Ghost.js";
+import Blinky from "./World/Blinky.js";
+import Inky from "./World/Inky.js";
+import Pinky from "./World/Pinky.js";
+import Clyde from "./World/Clyde.js";
 
 export default class World {
   constructor(_options) {
@@ -33,12 +37,18 @@ export default class World {
     this.powerPallet = new PowerPallet();
     this.pallet = new Pallet();
     this.pacman = new Pacman();
-    this.ghost = new Ghost();
+    // this.ghost = new Ghost();
+    this.blinky = new Blinky();
+    this.inky = new Inky();
+    this.pinky = new Pinky();
+    this.Clyde = new Clyde();
   }
 
   resize() {}
 
-  update() {}
+  update() {
+    if (this.ghost) this.ghost.update();
+  }
 
   destroy() {}
 }

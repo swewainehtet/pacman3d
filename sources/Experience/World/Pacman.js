@@ -18,7 +18,7 @@ export default class Pacman {
   }
 
   setMaterial() {
-    this.material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+    this.material = new THREE.MeshBasicMaterial({ color: 0xe47200 });
   }
 
   setMesh() {

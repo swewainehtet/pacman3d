@@ -8,6 +8,7 @@ export default class Ghost {
     this.experience = new Experience();
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
+    this.time = this.experience.time;
 
     this.setGeometry();
     this.setMaterial();
@@ -42,12 +43,12 @@ export default class Ghost {
   //   }
 
   //   for (let i = 0; i < this.count; i++) {
-  //     this.ghosts[i].traverse((object) => {
-  //       if (object.isMesh)
-  //         object.material = new THREE.MeshBasicMaterial({
-  //           color: this.colors[i],
-  //         });
+  // this.ghosts[i].traverse((object) => {
+  //   if (object.isMesh)
+  //     object.material = new THREE.MeshBasicMaterial({
+  //       color: this.colors[i],
   //     });
+  // });
   //     this.scene.add(this.ghosts[i]);
   //   }
   // }
@@ -74,5 +75,9 @@ export default class Ghost {
     }
 
     this.scene.add(this.mesh);
+  }
+
+  update() {
+    this.mesh.position.z = 0.5 * Math.sin(this.time.current * 0.005);
   }
 }
