@@ -11,7 +11,6 @@ import Camera from "./Camera.js";
 import World from "./World.js";
 
 import assets from "./assets.js";
-import Listeners from "./Utils/Listeners.js";
 
 export default class Experience {
   static instance;

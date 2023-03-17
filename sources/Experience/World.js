@@ -10,6 +10,7 @@ import Blinky from "./World/Blinky.js";
 import Inky from "./World/Inky.js";
 import Pinky from "./World/Pinky.js";
 import Clyde from "./World/Clyde.js";
+import Controls from "./Utils/Controls.js";
 
 export default class World {
   constructor(_options) {
@@ -21,6 +22,7 @@ export default class World {
     this.resources.on("groupEnd", (_group) => {
       if (_group.name === "base") {
         this.buildMap();
+        this.setControls();
       }
     });
   }
@@ -42,6 +44,10 @@ export default class World {
     this.inky = new Inky();
     this.pinky = new Pinky();
     this.clyde = new Clyde();
+  }
+
+  setControls() {
+    this.controls = new Controls();
   }
 
   resize() {}
