@@ -1,15 +1,18 @@
 import Experience from "../Experience";
 import * as THREE from "three";
 import * as Dim from "../Dim";
+import CANNON from "cannon";
 
 export default class Floor {
   constructor() {
     this.experience = new Experience();
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
+    this.physics = this.experience.world.physics;
 
     this.setGeometry();
     this.setMaterial();
+    this.setPhysics();
     this.setMesh();
   }
 
@@ -27,6 +30,14 @@ export default class Floor {
       color: 0x000005,
       wireframe: false,
     });
+  }
+
+  setPhysics() {
+    this.shape = new CANNON.Plane();
+    this.body = new CANNON.Body();
+    this.body.mass = 0;
+    this.body.addShape(this.shape);
+    this.physics.addBody(this.body);
   }
 
   setMesh() {

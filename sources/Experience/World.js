@@ -1,15 +1,19 @@
 import * as THREE from "three";
 import Experience from "./Experience.js";
+
 import Floor from "./World/Floor.js";
 import Wall from "./World/Wall.js";
+
 import PowerPallet from "./World/PowerPallet.js";
 import Pallet from "./World/Pallet.js";
+
 import Pacman from "./World/Pacman.js";
-import Ghost from "./World/Ghost.js";
 import Blinky from "./World/Blinky.js";
 import Inky from "./World/Inky.js";
 import Pinky from "./World/Pinky.js";
 import Clyde from "./World/Clyde.js";
+
+import CANNON from "cannon";
 import Controls from "./Utils/Controls.js";
 
 export default class World {
@@ -21,10 +25,16 @@ export default class World {
 
     this.resources.on("groupEnd", (_group) => {
       if (_group.name === "base") {
+        this.setPhysics();
         this.buildMap();
         this.setControls();
       }
     });
+  }
+
+  setPhysics() {
+    this.physics = new CANNON.World();
+    this.physics.gravity.set(0, 0, -9.81);
   }
 
   buildMap() {
@@ -39,7 +49,6 @@ export default class World {
     this.powerPallet = new PowerPallet();
     this.pallet = new Pallet();
     this.pacman = new Pacman();
-    // this.ghost = new Ghost();
     this.blinky = new Blinky();
     this.inky = new Inky();
     this.pinky = new Pinky();
@@ -53,6 +62,7 @@ export default class World {
   resize() {}
 
   update() {
+    if (this.pacman) this.pacman.update();
     if (this.blinky) this.blinky.update();
     if (this.inky) this.inky.update();
     if (this.pinky) this.pinky.update();

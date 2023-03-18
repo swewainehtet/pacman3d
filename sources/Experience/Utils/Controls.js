@@ -1,4 +1,5 @@
 import Experience from "../Experience";
+import gsap from "gsap";
 
 export default class Controls {
   constructor() {
@@ -7,18 +8,21 @@ export default class Controls {
     this.pacman = this.world.pacman;
 
     this.leftHandler = () => {
-      this.pacman.mesh.position.x -= 1;
+      this.pacman.moveLeft();
     };
 
     this.rightHandler = () => {
-      this.pacman.mesh.position.x += 1;
+      this.pacman.moveRight();
     };
 
     this.upHandler = () => {
-      this.pacman.mesh.position.y += 1;
+      this.pacman.moveUp();
     };
     this.downHandler = () => {
-      this.pacman.mesh.position.y -= 1;
+      this.pacman.moveDown();
+    };
+    this.jumpHandler = () => {
+      this.pacman.jump();
     };
 
     document.addEventListener("keydown", (event) => {
@@ -31,6 +35,7 @@ export default class Controls {
         s: this.downHandler,
         a: this.leftHandler,
         d: this.rightHandler,
+        " ": this.jumpHandler,
       }[event.key];
       callback?.();
     });
