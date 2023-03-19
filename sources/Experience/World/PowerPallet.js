@@ -8,6 +8,8 @@ export default class PowerPallet {
     this.experience = new Experience();
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
+    this.pacman = this.experience.world.pacman;
+    this.powerPalletArray = [];
 
     this.setGeometry();
     this.setMaterial();
@@ -26,23 +28,35 @@ export default class PowerPallet {
   }
 
   setMesh() {
-    this.dummy = new THREE.Object3D();
     this.count = powerPalletCoords.length;
-    this.mesh = new THREE.InstancedMesh(
-      this.geometry,
-      this.material,
-      this.count
-    );
 
     for (let i = 0; i < this.count; i++) {
-      this.dummy.position.set(
+      this.mesh = new THREE.Mesh(this.geometry, this.material);
+      this.mesh.position.set(
         powerPalletCoords[i].x + 0.5,
         powerPalletCoords[i].y + 0.5,
         0.5
       );
-      this.dummy.updateMatrix();
-      this.mesh.setMatrixAt(i, this.dummy.matrix);
+      this.scene.add(this.mesh);
+      this.powerPalletArray.push(this.mesh);
     }
-    this.scene.add(this.mesh);
+  }
+
+  update() {
+    for (let i = 0; i < this.count; i++) {
+      if (
+        this.pacman &&
+        this.powerPalletArray &&
+        this.pacman.mesh.position.x <
+          this.powerPalletArray[i].position.x + 0.5 &&
+        this.pacman.mesh.position.x >
+          this.powerPalletArray[i].position.x - 0.5 &&
+        this.pacman.mesh.position.y <
+          this.powerPalletArray[i].position.y + 0.5 &&
+        this.pacman.mesh.position.y > this.powerPalletArray[i].position.y - 0.5
+      ) {
+        this.scene.remove(this.powerPalletArray[i]);
+      }
+    }
   }
 }

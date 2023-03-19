@@ -2,7 +2,7 @@ import Experience from "../Experience";
 import * as THREE from "three";
 import * as Dim from "../Dim";
 import gsap from "gsap";
-import CANNON from "cannon";
+import * as CANNON from "cannon-es";
 
 export default class Pacman {
   constructor() {
@@ -41,7 +41,6 @@ export default class Pacman {
     if (this.body.position.x < 0) this.body.position.set(28, 18.5, 0.5);
     if (this.body.position.x > 28) this.body.position.set(0, 18.5, 0.5);
     this.mesh.position.copy(this.body.position);
-    console.log(this.body.position);
   }
 
   setMesh() {

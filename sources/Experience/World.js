@@ -13,7 +13,7 @@ import Inky from "./World/Inky.js";
 import Pinky from "./World/Pinky.js";
 import Clyde from "./World/Clyde.js";
 
-import CANNON from "cannon";
+import * as CANNON from "cannon-es";
 import Controls from "./Utils/Controls.js";
 
 export default class World {
@@ -35,6 +35,7 @@ export default class World {
   setPhysics() {
     this.physics = new CANNON.World();
     this.physics.gravity.set(0, 0, -9.81);
+    this.physics.broadphase = new CANNON.SAPBroadphase(this.physics);
   }
 
   buildMap() {
@@ -46,13 +47,14 @@ export default class World {
 
     this.floor = new Floor();
     this.wall = new Wall();
-    this.powerPallet = new PowerPallet();
-    this.pallet = new Pallet();
     this.pacman = new Pacman();
     this.blinky = new Blinky();
     this.inky = new Inky();
     this.pinky = new Pinky();
     this.clyde = new Clyde();
+
+    this.powerPallet = new PowerPallet();
+    this.pallet = new Pallet();
   }
 
   setControls() {
@@ -67,6 +69,9 @@ export default class World {
     if (this.inky) this.inky.update();
     if (this.pinky) this.pinky.update();
     if (this.clyde) this.clyde.update();
+
+    if (this.pallet) this.pallet.update();
+    if (this.powerPallet) this.powerPallet.update();
   }
 
   destroy() {}

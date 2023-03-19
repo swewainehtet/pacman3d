@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "cannon": "^0.6.2",
+    "cannon-es": "^0.20.0",
     "gsap": "^3.11.4",
     "lil-gui": "^0.16.1",
     "stats.js": "^0.17.0",
