@@ -10,6 +10,11 @@ export default [
       { name: "inkyModel", source: "/assets/ghost.glb", type: "gltfModel" },
       { name: "pinkyModel", source: "/assets/ghost.glb", type: "gltfModel" },
       { name: "clydeModel", source: "/assets/ghost.glb", type: "gltfModel" },
+      {
+        name: "defaultFont",
+        source: "assets/Roboto_Regular.json",
+        type: "font",
+      },
     ],
   },
 ];

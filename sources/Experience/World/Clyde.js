@@ -1,14 +1,11 @@
-import Experience from "../Experience";
 import * as THREE from "three";
 import * as Dim from "../Dim";
 import { ghostCoords } from "./Coords/GhostCoords.js";
+import Ghost from "./Ghost";
 
-export default class Clyde {
+export default class Clyde extends Ghost {
   constructor() {
-    this.experience = new Experience();
-    this.scene = this.experience.scene;
-    this.resources = this.experience.resources;
-    this.time = this.experience.time;
+    super();
 
     this.setModel();
   }
@@ -33,7 +30,7 @@ export default class Clyde {
   }
 
   update() {
-    this.model.position.z =
-      Dim.GHOST_SIZE * 2 + 0.2 * Math.cos(this.time.current * 0.005);
+    this.checkPacman();
+    this.bounce2();
   }
 }

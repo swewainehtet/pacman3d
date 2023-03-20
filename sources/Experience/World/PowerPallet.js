@@ -9,6 +9,7 @@ export default class PowerPallet {
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
     this.pacman = this.experience.world.pacman;
+    this.scoreBoard = this.experience.world.scoreBoard;
     this.powerPalletArray = [];
 
     this.setGeometry();
@@ -56,6 +57,11 @@ export default class PowerPallet {
         this.pacman.mesh.position.y > this.powerPalletArray[i].position.y - 0.5
       ) {
         this.scene.remove(this.powerPalletArray[i]);
+        this.scoreBoard.items.add(
+          powerPalletCoords[i].x.toString() +
+            "," +
+            powerPalletCoords[i].y.toString()
+        );
       }
     }
   }

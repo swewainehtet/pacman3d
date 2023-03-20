@@ -1,6 +1,8 @@
 import * as THREE from "three";
 import Experience from "./Experience.js";
 
+import Scoreboard from "./Scoreboard.js";
+
 import Floor from "./World/Floor.js";
 import Wall from "./World/Wall.js";
 
@@ -42,8 +44,13 @@ export default class World {
     /**
      * Axes Helper
      */
-    const axesHelper = new THREE.AxesHelper(5);
-    this.scene.add(axesHelper);
+    // const axesHelper = new THREE.AxesHelper(5);
+    // this.scene.add(axesHelper);
+
+    /**
+     * Build world
+     */
+    this.scoreBoard = new Scoreboard();
 
     this.floor = new Floor();
     this.wall = new Wall();
@@ -72,6 +79,7 @@ export default class World {
 
     if (this.pallet) this.pallet.update();
     if (this.powerPallet) this.powerPallet.update();
+    if (this.scoreBoard) this.scoreBoard.update();
   }
 
   destroy() {}

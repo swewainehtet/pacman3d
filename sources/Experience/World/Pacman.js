@@ -30,7 +30,7 @@ export default class Pacman {
     this.shape = new CANNON.Sphere(Dim.PACMAN_RADIUS);
     this.body = new CANNON.Body({
       mass: 1,
-      position: new CANNON.Vec3(14.5, 9.5, 0.25),
+      position: new CANNON.Vec3(14, 9.5, 0.25),
       shape: this.shape,
     });
     this.physics.addBody(this.body);
@@ -45,7 +45,7 @@ export default class Pacman {
 
   setMesh() {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
-    this.mesh.position.set(14.5, 9.5, 0.25);
+    this.mesh.position.set(14, 9.5, 0.25);
     this.scene.add(this.mesh);
   }
 

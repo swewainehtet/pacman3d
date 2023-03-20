@@ -1,7 +1,5 @@
-import Experience from "../Experience";
-import * as THREE from "three";
 import * as Dim from "../Dim";
-import { ghostCoords } from "./Coords/GhostCoords.js";
+import Experience from "../Experience";
 
 export default class Ghost {
   constructor() {
@@ -9,75 +7,28 @@ export default class Ghost {
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
     this.time = this.experience.time;
-
-    this.setGeometry();
-    this.setMaterial();
-    // this.setModel();
-    this.setMesh();
+    this.pacman = this.experience.world.pacman;
   }
 
-  setGeometry() {
-    this.geometry = new THREE.OctahedronGeometry(Dim.GHOST_SIZE);
+  bounce1() {
+    this.model.position.z =
+      Dim.GHOST_SIZE * 2 + 0.2 * Math.sin(this.time.current * 0.005);
   }
 
-  setMaterial() {
-    this.material = new THREE.MeshBasicMaterial();
+  bounce2() {
+    this.model.position.z =
+      Dim.GHOST_SIZE * 2 + 0.2 * Math.cos(this.time.current * 0.005);
   }
 
-  // setModel() {
-  //   this.ghosts = [];
-  //   this.colors = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00];
-  //   this.material = new THREE.MeshBasicMaterial();
-  //   this.model = this.resources.items.ghostModel.scene;
-  //   this.model.scale.set(0.1, 0.1, 0.1);
-
-  //   this.count = ghostCoords.length;
-
-  //   for (let i = 0; i < this.count; i++) {
-  //     this.model.position.set(
-  //       ghostCoords[i].x,
-  //       ghostCoords[i].y,
-  //       Dim.GHOST_SIZE
-  //     );
-  //     this.ghosts.push(structuredClone(this.model));
-  //   }
-
-  //   for (let i = 0; i < this.count; i++) {
-  // this.ghosts[i].traverse((object) => {
-  //   if (object.isMesh)
-  //     object.material = new THREE.MeshBasicMaterial({
-  //       color: this.colors[i],
-  //     });
-  // });
-  //     this.scene.add(this.ghosts[i]);
-  //   }
-  // }
-
-  setMesh() {
-    this.dummy = new THREE.Object3D();
-    this.count = ghostCoords.length;
-    this.mesh = new THREE.InstancedMesh(
-      this.geometry,
-      this.material,
-      this.count
-    );
-
-    for (let i = 0; i < this.count; i++) {
-      this.dummy.position.set(
-        ghostCoords[i].x,
-        ghostCoords[i].y,
-        Dim.GHOST_SIZE
-      );
-      this.dummy.updateMatrix();
-      this.mesh.setMatrixAt(i, this.dummy.matrix);
-      this.mesh.setColorAt(i, new THREE.Color(ghostCoords[i].color));
-      this.mesh.instanceColor.needsUpdate = true;
+  checkPacman() {
+    if (
+      this.pacman &&
+      this.pacman.mesh.position.x < this.model.position.x + 0.5 &&
+      this.pacman.mesh.position.x > this.model.position.x - 0.5 &&
+      this.pacman.mesh.position.y < this.model.position.y + 0.5 &&
+      this.pacman.mesh.position.y > this.model.position.y - 0.5
+    ) {
+      console.log("lose");
     }
-
-    this.scene.add(this.mesh);
-  }
-
-  update() {
-    this.mesh.position.z = 0.5 * Math.sin(this.time.current * 0.005);
   }
 }

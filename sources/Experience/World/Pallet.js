@@ -2,8 +2,6 @@ import Experience from "../Experience";
 import * as THREE from "three";
 import * as Dim from "../Dim";
 import { palletCoords } from "./Coords/PalletCoords";
-import * as CANNON from "cannon-es";
-import { wallCoords } from "./Coords/WallCoords";
 
 export default class PowerPallet {
   constructor() {
@@ -12,6 +10,7 @@ export default class PowerPallet {
     this.resources = this.experience.resources;
     this.physics = this.experience.world.physics;
     this.pacman = this.experience.world.pacman;
+    this.scoreBoard = this.experience.world.scoreBoard;
     this.palletArray = [];
 
     this.setGeometry();
@@ -58,6 +57,9 @@ export default class PowerPallet {
         this.pacman.mesh.position.y > this.palletArray[i].position.y - 0.5
       ) {
         this.scene.remove(this.palletArray[i]);
+        this.scoreBoard.items.add(
+          palletCoords[i].x.toString() + "," + palletCoords[i].y.toString()
+        );
       }
     }
   }

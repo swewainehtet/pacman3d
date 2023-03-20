@@ -4,6 +4,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
+import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 
 export default class Resources extends EventEmitter {
   /**
@@ -94,6 +95,18 @@ export default class Resources extends EventEmitter {
       extensions: ["hdr"],
       action: (_resource) => {
         rgbeLoader.load(_resource.source, (_data) => {
+          this.fileLoadEnd(_resource, _data);
+        });
+      },
+    });
+
+    // Font Loader
+    const fontLoader = new FontLoader();
+
+    this.loaders.push({
+      extensions: ["json"],
+      action: (_resource) => {
+        fontLoader.load(_resource.source, (_data) => {
           this.fileLoadEnd(_resource, _data);
         });
       },
