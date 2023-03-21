@@ -27,7 +27,7 @@ export default class Camera {
       20,
       this.config.width / this.config.height,
       0.1,
-      150
+      200
     );
     this.instance.rotation.reorder("YXZ");
 

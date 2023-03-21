@@ -3,6 +3,7 @@ import { palletCoords } from "./World/Coords/PalletCoords";
 import { powerPalletCoords } from "./World/Coords/PowerPalletCoords";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
 import * as THREE from "three";
+import { Text } from "troika-three-text";
 
 export default class Scoreboard {
   constructor() {
@@ -16,21 +17,19 @@ export default class Scoreboard {
   }
 
   setMesh() {
-    console.log(this.experience.resources.items.defaultFont);
-    this.geometry = new TextGeometry("0/244", {
-      font: this.experience.resources.items.defaultFont,
-      size: 2,
-      height: 0.1,
-    });
-
-    this.material = new THREE.ShaderMaterial();
-
-    this.mesh = new THREE.Mesh(this.geometry, this.material);
-    this.mesh.position.set(0, 37, 0);
-    this.scene.add(this.mesh);
+    this.scoreText = new Text();
+    this.scoreText.text = "Hello world!";
+    this.scoreText.anchorX = "100%";
+    this.scoreText.fontSize = 2;
+    this.scoreText.position.x = 28;
+    this.scoreText.position.y = 38;
+    this.scoreText.color = 0x2266ff;
+    this.scene.add(this.scoreText);
   }
 
   update() {
+    this.scoreText.text = this.items.size + "/244";
+    this.scoreText.sync();
     if (this.items.size == palletCoords.length + powerPalletCoords.length)
       console.log("win");
   }
