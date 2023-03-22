@@ -18,7 +18,7 @@ export default class Scoreboard {
 
   setMesh() {
     this.scoreText = new Text();
-    this.scoreText.text = "Hello world!";
+    this.scoreText.text = "/244";
     this.scoreText.anchorX = "100%";
     this.scoreText.fontSize = 2;
     this.scoreText.position.x = 28;
@@ -28,9 +28,11 @@ export default class Scoreboard {
   }
 
   update() {
+    // Update score text
     this.scoreText.text = this.items.size + "/244";
     this.scoreText.sync();
+
     if (this.items.size == palletCoords.length + powerPalletCoords.length)
-      console.log("win");
+      this.experience.world.displayWinScreen();
   }
 }

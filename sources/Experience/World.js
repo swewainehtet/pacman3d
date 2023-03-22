@@ -17,6 +17,8 @@ import Clyde from "./World/Clyde.js";
 
 import * as CANNON from "cannon-es";
 import Controls from "./Utils/Controls.js";
+import LoseScreen from "./Overlays/LoseScreen.js";
+import WinScreen from "./Overlays/WinScreen.js";
 
 export default class World {
   constructor(_options) {
@@ -54,6 +56,7 @@ export default class World {
 
     this.floor = new Floor();
     this.wall = new Wall();
+
     this.pacman = new Pacman();
     this.blinky = new Blinky();
     this.inky = new Inky();
@@ -66,6 +69,14 @@ export default class World {
 
   setControls() {
     this.controls = new Controls();
+  }
+
+  displayWinScreen() {
+    this.winScreen = new WinScreen();
+  }
+
+  displayLoseScreen() {
+    this.loseScreen = new LoseScreen();
   }
 
   resize() {}

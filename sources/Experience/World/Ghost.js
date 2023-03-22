@@ -28,7 +28,8 @@ export default class Ghost {
       this.pacman.mesh.position.y < this.model.position.y + 0.5 &&
       this.pacman.mesh.position.y > this.model.position.y - 0.5
     ) {
-      console.log("lose");
+      this.experience.world.displayLoseScreen();
+      this.experience.world.controls.off();
     }
   }
 }

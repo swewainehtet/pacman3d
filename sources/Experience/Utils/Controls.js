@@ -25,7 +25,7 @@ export default class Controls {
       this.pacman.jump();
     };
 
-    document.addEventListener("keydown", (event) => {
+    this.keydownEvent = (event) => {
       const callback = {
         ArrowUp: this.upHandler,
         ArrowDown: this.downHandler,
@@ -38,6 +38,12 @@ export default class Controls {
         " ": this.jumpHandler,
       }[event.key];
       callback?.();
-    });
+    };
+
+    document.addEventListener("keydown", this.keydownEvent);
+  }
+
+  off() {
+    document.removeEventListener("keydown", this.keydownEvent);
   }
 }
