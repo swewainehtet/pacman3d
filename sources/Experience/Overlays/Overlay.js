@@ -29,4 +29,8 @@ export default class Overlay {
 
     this.scene.add(this.mesh);
   }
+
+  controlsOff() {
+    this.experience.world.controls.off();
+  }
 }

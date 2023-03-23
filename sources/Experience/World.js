@@ -20,6 +20,8 @@ import Controls from "./Utils/Controls.js";
 import LoseScreen from "./Overlays/LoseScreen.js";
 import WinScreen from "./Overlays/WinScreen.js";
 
+import Pathfinder from "./Physics/Pathfinder.js";
+
 export default class World {
   constructor(_options) {
     this.experience = new Experience();
@@ -65,6 +67,8 @@ export default class World {
 
     this.powerPallet = new PowerPallet();
     this.pallet = new Pallet();
+
+    this.pathfinder = new Pathfinder();
   }
 
   setControls() {

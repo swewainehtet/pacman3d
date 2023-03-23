@@ -39,5 +39,7 @@ export default class LoseScreen extends Overlay {
     this.message.color = 0x2266ff;
     this.message.material = this.material;
     this.scene.add(this.message);
+
+    this.controlsOff();
   }
 }
