@@ -11,6 +11,9 @@ export default class Ghost {
     this.time = this.experience.time;
     this.pacman = this.experience.world.pacman;
     this.ghostMovement = new GhostMovement();
+    this.physics = this.experience.world.physics;
+
+    this.lastTimeRecorded = 0;
   }
 
   bounce1() {
@@ -36,44 +39,16 @@ export default class Ghost {
   }
 
   moveRandom() {
-    // const moveset = [
-    //   {
-    //     x: this.model.position.x - 1,
-    //     y: this.model.position.y,
-    //     name: "left",
-    //   },
-    //   {
-    //     x: this.model.position.x + 1,
-    //     y: this.model.position.y,
-    //     name: "right",
-    //   },
-    //   {
-    //     x: this.model.position.x,
-    //     y: this.model.position.y + 1,
-    //     name: "up",
-    //   },
-    //   {
-    //     x: this.model.position.x,
-    //     y: this.model.position.y - 1,
-    //     name: "down",
-    //   },
-    // ];
-    // const moveable = [];
-    // moveset.forEach((element) => {
-    //   if (!this.ghostMovement.isWall(element.x, element.y)) {
-    //     moveable.push(element);
-    //   }
-    // });
-    // const random = moveable[Math.floor(Math.random() * moveable.length)];
-    // this.moveStep(random.x, random.y);
-  }
-
-  moveStep(xx, yy) {
-    console.log(this.model.position);
-    gsap.to(this.model.position, {
-      x: xx,
-      y: yy,
-      duration: 1,
-    });
+    if (
+      !this.lastTimeRecorded ||
+      this.time.elapsed - this.lastTimeRecorded > 1000
+    ) {
+      this.lastTimeRecorded = this.time.elapsed;
+      this.body.velocity.set(
+        Dim.PACMAN_SPEED * (Math.random() * 2 - 1),
+        Dim.PACMAN_SPEED * (Math.random() * 2 - 1),
+        0
+      );
+    }
   }
 }

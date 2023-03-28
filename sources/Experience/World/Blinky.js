@@ -7,12 +7,9 @@ import * as CANNON from "cannon-es";
 export default class Blinky extends Ghost {
   constructor() {
     super();
-    this.time = this.experience.time;
-    this.physics = this.experience.world.physics;
 
     this.setModel();
     this.setPhysics();
-    this.lastTimeRecorded = 0;
   }
 
   setModel() {
@@ -50,18 +47,6 @@ export default class Blinky extends Ghost {
     this.model.position.y = this.body.position.y;
 
     this.bounce1();
-
-    if (
-      !this.lastTimeRecorded ||
-      this.time.elapsed - this.lastTimeRecorded > 1000
-    ) {
-      this.lastTimeRecorded = this.time.elapsed;
-      // this.moveRandom();
-      this.body.velocity.set(
-        Dim.PACMAN_SPEED * (Math.random() * 2 - 1),
-        Dim.PACMAN_SPEED * (Math.random() * 2 - 1),
-        0
-      );
-    }
+    this.moveRandom();
   }
 }

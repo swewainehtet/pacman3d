@@ -229,7 +229,7 @@ export default class Pathfinder {
 
       for (i = 0; i < this.ROW; i++) {
         for (j = 0; j < this.COL; j++) {
-          cellDetails[i][j] = new cell();
+          cellDetails[i][j] = new Cell();
           cellDetails[i][j].f = 2147483647;
           cellDetails[i][j].g = 2147483647;
           cellDetails[i][j].h = 2147483647;
@@ -385,7 +385,7 @@ export default class Pathfinder {
   }
 }
 
-class cell {
+class Cell {
   constructor() {
     this.parent_i = 0;
     this.parent_j = 0;
