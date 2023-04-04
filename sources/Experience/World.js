@@ -69,7 +69,7 @@ export default class World {
     this.pallet = new Pallet();
 
     this.pathfinder = new Pathfinder();
-    console.log(this.pathfinder);
+    // console.log(this.pathfinder);
   }
 
   setControls() {
