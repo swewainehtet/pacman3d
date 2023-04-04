@@ -27,7 +27,7 @@ export default class Renderer {
   }
 
   setInstance() {
-    this.clearColor = "#000035";
+    this.clearColor = "#0000000";
 
     // Renderer
     this.instance = new THREE.WebGLRenderer({
@@ -50,7 +50,7 @@ export default class Renderer {
     // this.instance.shadowMap.type = THREE.PCFSoftShadowMap
     // this.instance.shadowMap.enabled = false
     this.instance.toneMapping = THREE.NoToneMapping;
-    this.instance.toneMappingExposure = 1;
+    this.instance.toneMappingExposure = 0.9;
 
     this.context = this.instance.getContext();
 
@@ -100,7 +100,7 @@ export default class Renderer {
      */
     this.postProcess.bloomPass = new UnrealBloomPass(
       new THREE.Vector2(this.config.width, this.config.height),
-      1.1,
+      1.5,
       0.4,
       0.5
     );

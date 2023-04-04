@@ -39,6 +39,9 @@ export default class Ghost {
   }
 
   moveRandom() {
+    if (this.body.position.x < 0) this.body.position.set(28, 18.5, 0.5);
+    if (this.body.position.x > 28) this.body.position.set(0, 18.5, 0.5);
+
     if (
       !this.lastTimeRecorded ||
       this.time.elapsed - this.lastTimeRecorded > 1000
