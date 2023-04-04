@@ -2,6 +2,7 @@ import * as THREE from "three";
 import Experience from "./Experience.js";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 
 export default class Renderer {
   constructor(_options = {}) {
@@ -19,7 +20,7 @@ export default class Renderer {
       this.debugFolder = this.debug.addFolder("renderer");
     }
 
-    this.usePostprocess = false;
+    this.usePostprocess = true;
 
     this.setInstance();
     this.setPostProcess();
@@ -95,6 +96,16 @@ export default class Renderer {
     );
 
     /**
+     * Bloom pass
+     */
+    this.postProcess.bloomPass = new UnrealBloomPass(
+      new THREE.Vector2(this.config.width, this.config.height),
+      1.1,
+      0.4,
+      0.5
+    );
+
+    /**
      * Effect composer
      */
     this.renderTarget = new THREE.WebGLRenderTarget(
@@ -117,6 +128,7 @@ export default class Renderer {
     this.postProcess.composer.setPixelRatio(this.config.pixelRatio);
 
     this.postProcess.composer.addPass(this.postProcess.renderPass);
+    this.postProcess.composer.addPass(this.postProcess.bloomPass);
   }
 
   resize() {
